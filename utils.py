@@ -100,20 +100,8 @@ def window(dataset, input_len, output_len):
         feature_val), np.array(labels_val)
 
 
-def build_model(input_len, output_len):
-    model = Sequential()
-    model.add(LSTM(64, activation='relu', input_shape=(input_len, 1)))
-    model.add(Dense(32))
-    model.add(Dense(output_len))
-    model.compile(
-        loss='mae',
-        optimizer=tf.keras.optimizers.Adam(
-            learning_rate=0.001))
-    return model
-
-
 def plot(pred, test, date, output_len):
-    """Plot the results of the forecast"""
+    """Plot the results of the forecast and save to png"""
     pred = pred.reshape(output_len)
     dates_pred = date[-output_len:]
 
@@ -124,10 +112,11 @@ def plot(pred, test, date, output_len):
                              mode='lines',
                              name='ground truth'))
     fig.add_trace(go.Scatter(x=dates_pred, y=test[-output_len:],
-                             mode='lines+markers',
+                             mode='lines',
                              name='ground truth underlying pred'))
     fig.add_trace(go.Scatter(x=dates_pred, y=pred,
-                             mode='lines+markers',
+                             mode='lines',
                              name='prediction'))
-
+    fig.write_image(os.path.join("output",
+                                 "forecast_for_" + str(output_len) + "_days.png"))
     fig.show()

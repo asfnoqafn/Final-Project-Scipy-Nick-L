@@ -13,13 +13,10 @@ data will be cut off in the beginning.
 During preprocessing the data will be normalized via MinMax and a testing dataset is created.
 
 3. windowed:
-During windowing of the data the time series a supervised learning problem is created and the data is split into training and validation data.
+During windowing of the data the time series, a supervised learning problem is created and the data is split into training and validation data.
 Example:
-time-series = [1,2,3,4,5,6,7,8,9]
-input length = 5
-output length = 3
-
-A window would be [1,2,3,4,5]->[6,7,8]
+        time-series =[1,2,3,4,5,6,7,8,9]; input length = 5; output length = 3.
+        A window would be [1,2,3,4,5]->[6,7,8]
 
 4. input into the model:
 Since the first layer of the network is an LSTM-layer the input data needs to be 3-dimensions. Architecture is held simple to avoid overfitting and consists of one LSTM and two Dense-Layers.
@@ -41,5 +38,6 @@ Example 2: python main.py is also possible and takes default values
 Selecting possible inputs:
 inputlenght >= outputlength! It would not make too much sense to try and predict 10 days into the future based on the last 2 days
 
-A large input leads to longer training times but potentially better results. A small output length leads to better results since predicting one day into the future is easier than 10. A higher learning rate leads to faster training times due to the early stopping but decreases the quality of results. Currently, only VW.csv and Dax.csv are in the inputs folder. Any other stock data from yahoo should work. The CSV file needs "Date","High" and "Low" column.
+A large input length leads to longer training times but potentially better results. A small output length leads to better results since predicting one day into the future is easier than 10. A higher learning rate leads to faster training times due to the early stopping but decreases the quality of results. Currently, only VW.csv and Dax.csv are in the inputs folder. Any other stock data from yahoo should work. The CSV file needs "Date","High" and "Low" column.
 
+As one can see from the png in the output folder or the graph after plotting, the results vary. Some are acceptable while others are completely off depending on settings and luck. Obviously trying to predict the Dax is impossible and if someone could reliably predict it that person would be absurdly rich. Overall I am satisfied with the results of this project.
