@@ -6,7 +6,6 @@ import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import LSTM
 from keras.layers import Dense
-import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
 
